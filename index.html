@@ -18,9 +18,12 @@
         }
         return vars;
     }
+    var url = window.location.href
+    var arr = url.split("/");
+
 
     var defaults = {
-        host: "http://graphite.host", prefix: "",
+        host: arr[0] + '//' + arr[2], prefix: "rtb-test",
         from: "-12hours", width: 1800, height: 250,
     };
 
@@ -104,7 +107,7 @@
             var src = config.host + "/render/?";
             src += $.param($.extend(g, config), true);
             src = src.replace(/PREFIX/g, config.prefix);
-            return $("<img>")
+            return $("<img style=\"margin-top: 1px; margin-bottom: 1px;\">")
                 .attr({src: src, width: config.width, height: config.height})
                 .bind("dblclick", function (e) { 
                     window.open(src.replace("render", "composer")); 
